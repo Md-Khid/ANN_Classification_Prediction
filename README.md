@@ -232,5 +232,28 @@ Based on the Loan Grade plot: The plot shows that loans assigned higher grades (
 
 Based on the Default on File plot: The plot suggests that individuals without a history of default tend to obtain loans across a broader range of amounts and generally at lower interest rates compared to those with a default record.
 
+#### Dummy Variables
+```
+# Identify categorical columns
+categorical_columns = df.select_dtypes(include=['object']).columns.tolist()
+
+# Remove loan_status from categorical_columns
+categorical_columns.remove('loan_status')
+
+# Perform one-hot encoding for categorical variables dropping the first level. 
+# We can skip the 'drop_first=True' for the dummy variable as multicollinearity isn't typically an issue for ANN 
+# as it is for linear regression. 
+df = pd.get_dummies(df, columns=categorical_columns)
+
+# Map loan_status to {Non-Default=0, Default=1}
+df['loan_status'] = df['loan_status'].map({'Non-Default': 0, 'Default': 1})
+
+# Display the resulting DataFrame
+df
+```
+![9](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/b1b7d835-dcc6-41f8-b016-2f36aa881f8b)
+
+By converting categorical variables into dummy variables and assigning the loan_status as {Non-Default=0, Default=1}, we can prepare them for input into machine learning models. This ensures that categorical data seamlessly integrates into the modeling process, enhancing analysis and prediction tasks performed by the algorithms.
+
 
 
