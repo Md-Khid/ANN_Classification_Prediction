@@ -113,7 +113,7 @@ columns_with_missing_values
 
 Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median, or mode depending on the data distribution.
 
-Fill missing values
+#### Fill missing values
 ```
 # Fill missing values in 'person_emp_length' and 'loan_int_rate' columns with median
 df['person_emp_length'].fillna(df['person_emp_length'].median(), inplace=True)
@@ -125,7 +125,7 @@ count_missing_values
 ```
 ![5](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/cfac806a-7333-4784-a55f-21ac1378439d)
 
-Define special characters
+#### Define special characters
 ```
 # Define special characters
 special_chars = "!@#$%^&"
@@ -185,8 +185,6 @@ plot_corr_and_print_highly_correlated(df)
 ![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/fe426d08-2053-4cb4-8c59-abaad0e1c460)
 
 Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
-
-### Data Visualisation
 
 #### Scatterplot
 ```
