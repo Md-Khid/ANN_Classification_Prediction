@@ -273,6 +273,8 @@ df.shape
 ```
 ![10](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/96135433-7c02-41b8-9c53-61e6924aa431)
 
+We will be excluding any outliers found in the dataset. This is because outliers can greatly affect how the model parameters are estimated especially for the ANN loss function during data training. By removing these outliers, we can create a more precise and reliable ANN model 
+
 
 
 
