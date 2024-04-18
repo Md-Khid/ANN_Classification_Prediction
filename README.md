@@ -63,4 +63,4 @@ df['loan_status'] = df['loan_status'].map(loan_status_mapping)
 # Display the updated DataFrame
 df
 ```
-
+![1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d7246f0f-7126-4bbe-891b-344078058cb9)
