@@ -157,7 +157,7 @@ df
 ```
 ![6](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c5a735ab-8cde-48f7-872c-8c691b05b569)
 
-We will scale the numerical value columns in the dataset. This helps us understand how the variables relate to each other especially when making scatterplots and studying correlations. Doing this makes sure that the variables are on the same scale making it easier to interpret their relationships accurately.
+We will scale the numerical value columns in the dataset. This helps us understand how the variables relate to each other especially when making scatterplots and studying correlations. This ensures that the variables are standardised to a consistent scale, thereby facilitating accurate interpretation of their relationships.
 
 #### Correlation Matrix Plot
 ```
@@ -183,7 +183,9 @@ def plot_corr_and_print_highly_correlated(df):
 plot_corr_and_print_highly_correlated(df)
 ```
 
+![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/6289c4b1-8e05-4eae-af8b-575c0f0788d6)
 
+Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
 
 
 
