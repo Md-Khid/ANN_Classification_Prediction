@@ -275,9 +275,37 @@ df.shape
 
 We will be excluding any outliers found in the dataset. This is because outliers can greatly affect how the model parameters are estimated especially for the ANN loss function during data training. By removing these outliers, we can create a more precise and reliable ANN model.
 
+#### Class Imbalance Correction Using SMOTE
+```
+X = df.drop(columns=['loan_status'])  # Features
+y = df['loan_status']  # Target variable
 
+# Initialize SMOTE
+smote = SMOTE()
 
+# Perform SMOTE
+X_resampled, y_resampled = smote.fit_resample(X, y)
 
+# Before SMOTE
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.title('Before SMOTE')
+counts = df['loan_status'].value_counts().sort_index()
+counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(counts) / 100), colors=['skyblue', 'lightcoral'])
+plt.ylabel('')
+
+# After SMOTE
+plt.subplot(1, 2, 2)
+plt.title('After SMOTE')
+resampled_counts = y_resampled.value_counts().sort_index()
+resampled_counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(resampled_counts) / 100), colors=['skyblue', 'lightcoral'])
+plt.ylabel('')
+
+plt.show()
+```
+![11](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/ae801d77-6263-40b6-8aa5-974904afae98)
+
+To address the imbalance in the predictor column (loan_status) as mentioned earlier, we will use SMOTE to oversample the minority class (Default=1) to align with the majority class (Non-Default=0). Upon applying SMOTE, we can see that both classes now have equal balanced representation.
 
 
 
