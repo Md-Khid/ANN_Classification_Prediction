@@ -186,7 +186,9 @@ plot_corr_and_print_highly_correlated(df)
 
 Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
 
-#### Data Visualisation
+### Data Visualisation
+
+#### Scatterplot
 ```
 # Define the list of variables for hue
 hue_variables = ['loan_status','person_home_ownership', 'loan_intent', 'loan_grade', 'cb_person_default_on_file']
