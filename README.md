@@ -39,6 +39,7 @@ In this phase of data processing, we will refine the dataset for analysis by add
 #!pip install tensorflow
 
 import pandas as pd
+import numpy as np  
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 from imblearn.over_sampling import SMOTE
 import seaborn as sns
@@ -336,4 +337,46 @@ To further configure the ANN model, we will set the following hyperparameters: â
 
 #### Evaluation of Model - Confusion Matrix
 
+```
+# Predictions on test data
+y_pred = model.predict(X_test)
+y_pred = (y_pred > 0.5)  # Convert probabilities to binary predictions
+
+# Calculate metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
+specificity = conf_matrix[0, 0] / (conf_matrix[0, 0] + conf_matrix[0, 1])
+
+# Plot confusion matrix 
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', annot_kws={"size": 16})
+plt.xlabel('Predicted Labels')
+plt.ylabel('True Labels')
+plt.title('Confusion Matrix')
+
+# Add legend box for metrics
+metrics_legend = f"Accuracy: {accuracy:.2f}\nPrecision: {precision:.2f}\nRecall (Sensitivity): {recall:.2f}\nF1 Score: {f1:.2f}\nSpecificity: {specificity:.2f}"
+plt.text(1.40, 0.5, metrics_legend, fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
+
+# Add total instances for each class below the legend box
+total_0_instances = np.sum(conf_matrix[0])
+total_1_instances = np.sum(conf_matrix[1])
+plt.text(1.30, 0.3, f'Total Instances of 0: {total_0_instances}', fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
+plt.text(1.30, 0.2, f'Total Instances of 1: {total_1_instances}', fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
+
+plt.show()
+```
+
+![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/6a7e8d8d-c79d-4843-9b39-5328e5bd72a9)
+
+To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the matrix:
+
+- Accuracy: Shows that 82% of all cases were accurately predicted by the model.
+- Precision: Indicates that 89% of the predicted Default cases were accurately identified as true positives.
+- Recall (Sensitivity): Shows that 74% of the actual Default cases were identified by the model.
+- F1 Score: The model achieved a reasonable balance between precision and recall at 0.81. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
+- Specificity: Indicates that 91% of Non-Default cases were correctly predicted by the model.
 
