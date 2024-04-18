@@ -51,3 +51,16 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 ```
 
 #### Loading and Categorising Loan Status in a Credit Risk Dataset
+
+```
+# Load and read the CSV file
+df = pd.read_csv('credit_risk_dataset.csv')
+
+# Map loan_status to categorical values
+loan_status_mapping = {0: 'Non-Default', 1: 'Default'}
+df['loan_status'] = df['loan_status'].map(loan_status_mapping)
+
+# Display the updated DataFrame
+df
+```
+
