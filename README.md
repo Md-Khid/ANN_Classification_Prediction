@@ -308,6 +308,32 @@ plt.show()
 To address the imbalance in the predictor column (loan_status) as mentioned earlier, we will use SMOTE to oversample the minority class (Default=1) to align with the majority class (Non-Default=0). Upon applying SMOTE, we can see that both classes now have equal balanced representation.
 
 ### ANN Model Training for Loan Status Prediction
+```
+# Separate features and target variable
+X = X_resampled  # Features after SMOTE
+y = y_resampled  # Target variable after SMOTE
 
+# Split the data into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=12345)
+
+# Build the ANN model
+model = keras.Sequential([
+    keras.layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),
+    keras.layers.Dense(32, activation='relu'),
+    keras.layers.Dense(1, activation='sigmoid')
+])
+
+# Compile the model
+model.compile(optimizer='sgd',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+# Train the model
+history = model.fit(X_train, y_train, epochs=30, batch_size=32, validation_split=0.2)
+```
+For the modelling phase, we will split the dataset into training and testing datasets. We will use 70% of the data to train and 30% to test. To ensure reproducible results, we will set the random state to 12345. We will intend to create an Artificial Neural Network (ANN) model comprising two concealed layers. In the initial layer, we will incorporate 64 neurons utilising the Rectified Linear Unit (ReLU) as their activation function. Following this, the second layer will consist of 32 neurons, also employing ReLU as their activation function. Finally, the output layer will feature a single neuron employing a sigmoid activation function specifically designed for binary classification output.
+To further configure the ANN model, we will set the following hyperparameters: ‘Stochastic Gradient Descent’ (SGD) as the optimiser for adjusting the weights of the neural network during training, Binary Crossentropy' as the loss function to help the ANN model make better predictions for binary classification tasks and ‘Accuracy’ as the measure to monitor and assess the model's precision in its classification process. Additionally, we will use the fit function to train the model. We will train the model using the X_resampled and Y_resampled datasets and feed the entire dataset to undergo 30 epochs with a batch size of 32 samples to enhance training efficiency. Furthermore, we will allocate additional validation set of 20% to help the model detect overfitting.
+
+#### Evaluation of Model - Confusion Matrix
 
 
