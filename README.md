@@ -255,5 +255,25 @@ df
 
 By converting categorical variables into dummy variables and assigning the loan_status as {Non-Default=0, Default=1}, we can prepare them for input into machine learning models. This ensures that categorical data seamlessly integrates into the modeling process, enhancing analysis and prediction tasks performed by the algorithms.
 
+#### Remove Outliers
+```
+# Select numeric columns
+numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
+
+# Detect outliers using z-score
+z_scores = stats.zscore(df[numeric_cols])
+abs_z_scores = abs(z_scores)
+filtered_entries = (abs_z_scores < 3).all(axis=1)
+
+# Remove outliers from DataFrame
+df = df[filtered_entries]
+
+# Check the shape of the DataFrame after removing outliers
+df.shape
+```
+![10](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/96135433-7c02-41b8-9c53-61e6924aa431)
+
+
+
 
 
