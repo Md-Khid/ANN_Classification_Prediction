@@ -138,6 +138,8 @@ for column in df.columns:
         if any(char in special_chars for char in str(value)):
             print(f"Special characters found in column '{column}', row {index}: {value}")
 ```
+We will proceed with computing missing values for every column in the dataset and fill them with the suitable statistical value such as the median. Additionally, we will examine for any special characters that might impede the machine learning algorithm process.
+
 
 ## Exploratory Data Analysis 
 In this section, we will delve into comprehending the dataset. This encompasses tasks such as examining data distributions, identifying outliers, visualising correlations between variables and detecting any irregularities or trends, then transforming the insights obtained into valuable information.
@@ -155,9 +157,31 @@ df
 ```
 ![6](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c5a735ab-8cde-48f7-872c-8c691b05b569)
 
-Scaling numerical variables in a dataset helps in understanding the relationships between variables, particularly when creating scatterplots and conducting correlation analysis. It ensures that variables are comparable on a similar scale, facilitating more accurate interpretation of their relationships.
+We will scale the numerical value columns in the dataset. This helps us understand how the variables relate to each other especially when making scatterplots and studying correlations. Doing this makes sure that the variables are on the same scale making it easier to interpret their relationships accurately.
 
+#### Correlation Matrix Plot
+```
+def plot_corr_and_print_highly_correlated(df):
+    # Calculate correlation matrix for numeric columns
+    corr_matrix = df.select_dtypes(include='number').corr()
 
+    # Plot heatmap
+    plt.figure(figsize=(10, 5))  # Specify the figure size
+    sns.heatmap(corr_matrix, annot=True, fmt=".2f", linewidths=.5, xticklabels=corr_matrix.columns, yticklabels=corr_matrix.columns, cbar_kws={'orientation': 'vertical'})
+    plt.xticks(rotation=45)  # Rotate x-axis labels by 45 degrees
+    plt.show()
+
+    # Print highly correlated pairs
+    print("Highly Correlated Features:")
+    for i in range(len(corr_matrix.columns)):
+        for j in range(i):
+            if abs(corr_matrix.iloc[i, j]) > 0.8: 
+                pair = (corr_matrix.columns[i], corr_matrix.columns[j])
+                print(pair)
+
+# Call the function
+plot_corr_and_print_highly_correlated(df)
+```
 
 
 
