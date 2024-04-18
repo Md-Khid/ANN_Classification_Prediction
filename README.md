@@ -369,14 +369,83 @@ plt.text(1.30, 0.2, f'Total Instances of 1: {total_1_instances}', fontsize=12, h
 
 plt.show()
 ```
-
-![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/6a7e8d8d-c79d-4843-9b39-5328e5bd72a9)
+![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/f15462cf-14d4-4b11-8c9a-88fd8c6e32c5)
 
 To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the chart:
 
-- Accuracy: Shows that 83% of all cases were accurately predicted by the model.
+- Accuracy: Shows that 82% of all cases were accurately predicted by the model.
 - Precision: Indicates that 87% of the predicted Default cases were accurately identified as true positives.
-- Recall (Sensitivity): Shows that 78% of the actual Default cases were identified by the model.
-- F1 Score: The model achieved a reasonable balance between precision and recall at 0.82. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
+- Recall (Sensitivity): Shows that 76% of the actual Default cases were identified by the model.
+- F1 Score: The model achieved a reasonable balance between precision and recall at 0.81. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
 - Specificity: Indicates that 88% of Non-Default cases were correctly predicted by the model.
+
+#### Evaluation of Model - Receiver Operating Characteristic (ROC) Curve and Area Under the Curve (AUC)
+```
+# Calculate ROC curve and AUC for training set
+fpr_train, tpr_train, _ = roc_curve(y_train, model.predict(X_train))
+auc_train = auc(fpr_train, tpr_train)
+
+# Calculate ROC curve and AUC for testing set
+fpr_test, tpr_test, _ = roc_curve(y_test, model.predict(X_test))
+auc_test = auc(fpr_test, tpr_test)
+
+# Plot both ROC curves
+plt.figure(figsize=(8, 6))
+plt.plot(fpr_train, tpr_train, color='blue', lw=2, label='Train ROC curve (AUC = {:.2f})'.format(auc_train))
+plt.plot(fpr_test, tpr_test, color='orange', lw=2, label='Test ROC curve (AUC = {:.2f})'.format(auc_test))
+plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend(loc='lower right')
+plt.show()
+```
+![13](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/be188497-8eb4-494b-9e3c-e3730971a256)
+
+We can delve deeper into assessing and demonstrating the effectiveness of the ANN model by creating a ROC and AUC chart. Based on the chart:
+
+-ROC Curve: Both the training and testing ROC curves are notably above the diagonal red dashed line which signifies a no-skill classifier. This indicates that the model demonstrates strong predictive performance.
+-AUC Value: The Area Under the Curve (AUC) for both the training and testing data is 0.90. This indicates that the model demonstrates a high degree of separability (where 0.50 denotes random chance) and can effectively differentiate between positive and negative classes.
+
+Evaluation of Model - Predictor of Importance
+```
+# Get the column names from the DataFrame
+column_names = X_train.columns
+
+# Retrieve the weights of the first layer of the neural network model
+weights = model.layers[0].get_weights()[0]
+
+# Calculate the absolute sum of weights for each feature
+feature_weights_sum = abs(weights).sum(axis=0)
+
+# Create a dictionary of feature names and their importance
+feature_importance = dict(zip(column_names, feature_weights_sum))
+
+# Sort the dictionary by value in descending order
+sorted_feature_importance = dict(sorted(feature_importance.items(), key=lambda item: item[1], reverse=True))
+
+# Select the top 5 features
+top_5_features = dict(list(sorted_feature_importance.items())[:5])
+
+# Create a horizontal bar chart
+plt.barh(list(top_5_features.keys()), list(top_5_features.values()))
+plt.xlabel('Importance')
+plt.ylabel('Predictors')
+plt.gca().invert_yaxis() 
+plt.show()
+```
+
+![14](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/7a75de69-a78d-41f7-9982-8b5659d55b0d)
+
+As the ANN model is often seen as a 'black box,' it can be difficult to figure out which factors truly affect the model's classification predictions. This is because of the complex multiple layers and parameters that are being used in the model’s algorithm. Therefore, it is important to determine the predictors that have the most impact on the model's predictions in order to gain insights into which inputs influence the model's decision-making process. This is particularly helpful for interpreting and identifying the key predictors that influence the model's predictions. These predictors can then be used to explain the model's behaviour to stakeholders or domain experts. Based to the chart:
+
+1. loan_intent_EDUCATION: This is the most vital predictor. It indicates that the intention behind the loan particularly for educational purposes, significantly influences whether a loan defaults or not. This may be attributed to various factors such as the elevated cost of education contributing to a greater chance of default.
+2. person_home_ownership_MORTGAGE: This predictor ranks as the second most crucial. It suggests that owning a home especially with a mortgage, strongly correlates with the default status of a loan. This could be due to the presence of a mortgage signifying a substantial financial commitment. Thereby, increasing the risk of default.
+3. cb_person_cred_hist_length: This stands as the third most significant predictor. The duration of an individual's credit history serves as a reliable indicator of their financial conduct and dependability. Thereby, impacting their probability of defaulting on a loan.
+4. loan_grade_A: This predictor indicates that the loan's grade particularly grade A, exerts a substantial influence on its default status. Loans graded A are typically offered to borrowers with high creditworthiness implying a lower likelihood of default.
+5. loan_int_rate: The interest rate attached to the loan also emerges as a noteworthy predictor. Higher interest rates may render the loan more challenging to repay. Thereby, potentially elevating the likelihood of default.
+
+
 
