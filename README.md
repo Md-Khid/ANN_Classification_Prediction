@@ -64,3 +64,12 @@ df['loan_status'] = df['loan_status'].map(loan_status_mapping)
 df
 ```
 ![1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d7246f0f-7126-4bbe-891b-344078058cb9)
+
+
+#### Check data types of each column
+```
+# Check data types of each column
+df.dtypes
+```
+
+![2](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/0515c36a-a3fb-49c6-9337-e2667c17954e)
