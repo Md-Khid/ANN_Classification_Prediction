@@ -32,7 +32,7 @@ In this phase of data processing, we will refine the dataset for analysis by add
 
 ### Data Pre-processing:
 
-#### Import Python Libraries and Modules for Data Preprocessing, Modelling, and Evaluation
+#### Import Python Libraries and Modules for Data Preprocessing, Modelling and Evaluation
 ```
 # Install pip packages if required
 #!pip install imblearn
@@ -49,3 +49,5 @@ from tensorflow import keras
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
 ```
+
+#### Loading and Categorising Loan Status in a Credit Risk Dataset
