@@ -28,7 +28,7 @@ The dataset consists of different details about customers' financial situations 
 
 ## Data Preparation
 
-In this phase of data processing, we will refine the dataset for analysis by addressing missing values, handling special characters, and encoding variables. Additionally, we will import all necessary modules and libraries for the project and transform categorical variables into category columns for data visualisation purposes.
+In this phase of data processing, we will refine the dataset for analysis by addressing missing values, handling special characters and encoding variables. Additionally, we will import all necessary modules and libraries for the project and transform categorical variables into category columns for data visualisation purposes.
 
 ### Data Pre-processing:
 
@@ -67,7 +67,7 @@ df
 ![1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d7246f0f-7126-4bbe-891b-344078058cb9)
 
 
-#### Check data types of each column
+#### Check Data Types 
 ```
 # Check data types of each column
 df.dtypes
@@ -96,7 +96,7 @@ Descriptive_Stats
 
 ![3](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/89902bff-0a51-4d02-93a6-47cbedd2e12d)
 
-By creating a descriptive statistics table, we can summarise important details about the dataset including central measures and spread for both categories and numbers. From the table, we notice that most customers are renting and have a good credit rating of A for their loans which are mainly for education. With an average customer age of 27 years, it seems likely that many in the dataset are working adults pursuing further studies. Moreover, we observe that the predictor column (loan_status) has imbalanced data, where roughly 78% of entries fall under the Non-Default category. Interestingly, there is an anomalous Max value of 123 years contained in the "person_emp_length" column, which will be addressed by removing it as an outlier.
+By creating a descriptive statistics table, we can summarise important details about the dataset including central measures and spread for both categories and numbers. From the table, we notice that most customers are renting and have a good credit rating of A for their loans which are mainly for education. With an average customer age of 27 years, it seems likely that many in the dataset are working adults pursuing further studies. Moreover, we observe that the predictor column (loan_status) has imbalanced data where roughly 78% of entries fall under the Non-Default category. Interestingly, there is an anomalous Max value of 123 years contained in the "person_emp_length" column which will be addressed by removing it as an outlier.
 
 
 #### Identify Columns with Missing Values
@@ -222,7 +222,8 @@ plt.show()
 ```
 ![8](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c1a91bac-4f5d-4ca8-8252-591ba0abb299)
 
-However, by colouring the plots with the categorical data columns, we can observe some interesting insights about the customers in the dataset. From the plots, we can observe the following points :
+However, by colouring the plots with the categorical data columns, we can observe some interesting insights about the customers in the dataset. From the plots, we can observe the following points:
+
 Based on the Loan Status plot: The plot suggests a higher proportion of individuals classified as non-defaulters compared to defaulters. Moreover, there is an observed trend suggesting that default rates tend to rise as loan amounts increase. Notably, loans characterised by smaller amounts and lower interest rates exhibit a higher likelihood of being repaid resulting in a non-default status.
 
 Based on the Home Ownership plot: The plot suggests that individuals who rent or hold mortgages often apply for larger loan amounts. Interestingly, mortgagors appear to secure loans at comparatively lower interest rates compared to renters.
@@ -254,7 +255,7 @@ df
 ```
 ![9](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/b1b7d835-dcc6-41f8-b016-2f36aa881f8b)
 
-By converting categorical variables into dummy variables and assigning the loan_status as {Non-Default=0, Default=1}, we can prepare them for input into machine learning models. This ensures that categorical data seamlessly integrates into the modeling process, enhancing analysis and prediction tasks performed by the algorithms.
+By converting categorical variables into dummy variables and assigning the loan_status as (Non-Default=0, Default=1), we can prepare them for input into machine learning models. This ensures that categorical data seamlessly integrates into the modeling process, enhancing analysis and prediction tasks performed by the algorithms.
 
 #### Remove Outliers
 ```
