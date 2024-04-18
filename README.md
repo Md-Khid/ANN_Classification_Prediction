@@ -75,7 +75,7 @@ df.dtypes
 ![2](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/0515c36a-a3fb-49c6-9337-e2667c17954e)
 
 #### Create Descriptive Stats table
-By creating a descriptive statistics table, we can summarise important details about the dataset including central measures and spread for both categories and numbers. From the table, we notice that most customers are renting and have a good credit rating of A for their loans which are mainly for education. With an average customer age of 27 years, it seems likely that many in the dataset are working adults pursuing further studies. Moreover, we observe that the predictor column (loan_status) has imbalanced data, where roughly 78% of entries fall under the Non-Default category 
+By creating a descriptive statistics table, we can summarise important details about the dataset including central measures and spread for both categories and numbers. From the table, we notice that most customers are renting and have a good credit rating of A for their loans which are mainly for education. With an average customer age of 27 years, it seems likely that many in the dataset are working adults pursuing further studies. Moreover, we observe that the predictor column (loan_status) has imbalanced data, where roughly 78% of entries fall under the Non-Default category. 
 ```
 # Create Descriptive Stats table 
 Descriptive_Stats = df.describe(include='all').round(2)
@@ -95,4 +95,21 @@ Descriptive_Stats
 ```
 
 ![3](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/89902bff-0a51-4d02-93a6-47cbedd2e12d)
+
+
+#### Identify Columns with Missing Values
+```
+# Calculate number of missing values 
+missing_values = df.isnull().sum()
+
+# Filter the missing_values
+columns_with_missing_values = missing_values[missing_values > 0]
+
+# Display columns with missing values
+columns_with_missing_values
+```
+
+![4](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/06593c2d-5caa-4415-8515-8ed4dac12adc)
+
+
 
