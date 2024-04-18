@@ -30,4 +30,22 @@ The dataset consists of different details about customers' financial situations 
 
 In this phase of data processing, we will refine the dataset for analysis by addressing missing values, handling special characters, and encoding variables. Additionally, we will import all necessary modules and libraries for the project and transform categorical variables into category columns for data visualisation purposes.
 
+### Data Pre-processing:
 
+#### Import Python Libraries and Modules for Data Preprocessing, Modelling, and Evaluation
+```
+# Install pip packages if required
+#!pip install imblearn
+#!pip install tensorflow
+
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
+from imblearn.over_sampling import SMOTE
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+import tensorflow as tf
+from tensorflow import keras
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
+```
