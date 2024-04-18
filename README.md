@@ -372,11 +372,11 @@ plt.show()
 
 ![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/6a7e8d8d-c79d-4843-9b39-5328e5bd72a9)
 
-To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the matrix:
+To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the chart:
 
-- Accuracy: Shows that 82% of all cases were accurately predicted by the model.
-- Precision: Indicates that 89% of the predicted Default cases were accurately identified as true positives.
-- Recall (Sensitivity): Shows that 74% of the actual Default cases were identified by the model.
-- F1 Score: The model achieved a reasonable balance between precision and recall at 0.81. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
-- Specificity: Indicates that 91% of Non-Default cases were correctly predicted by the model.
+- Accuracy: Shows that 83% of all cases were accurately predicted by the model.
+- Precision: Indicates that 87% of the predicted Default cases were accurately identified as true positives.
+- Recall (Sensitivity): Shows that 78% of the actual Default cases were identified by the model.
+- F1 Score: The model achieved a reasonable balance between precision and recall at 0.82. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
+- Specificity: Indicates that 88% of Non-Default cases were correctly predicted by the model.
 
