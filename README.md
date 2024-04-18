@@ -305,6 +305,10 @@ plt.show()
 ```
 ![11](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/ae801d77-6263-40b6-8aa5-974904afae98)
 
+### ANN Model Training for Loan Status Prediction
+
+
+
 To address the imbalance in the predictor column (loan_status) as mentioned earlier, we will use SMOTE to oversample the minority class (Default=1) to align with the majority class (Non-Default=0). Upon applying SMOTE, we can see that both classes now have equal balanced representation.
 
 
