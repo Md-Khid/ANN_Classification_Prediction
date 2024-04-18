@@ -443,5 +443,9 @@ As the ANN model is often seen as a 'black box,' it can be difficult to figure o
 4. loan_grade_A: This predictor indicates that the loan's grade particularly grade A, exerts a substantial influence on its default status. Loans graded A are typically offered to borrowers with high creditworthiness implying a lower likelihood of default.
 5. loan_int_rate: The interest rate attached to the loan also emerges as a noteworthy predictor. Higher interest rates may render the loan more challenging to repay. Thereby, potentially elevating the likelihood of default.
 
+### Discussion & Concluding Remarks
+Artificial Neural Networks (ANNs) offer a promising avenue for transforming credit risk assessment within the banking sector. However, it's crucial to recognise the vital role of human insight when analysing data. Even with advanced algorithms like ANNs, certain aspects of risk analysis rely on human judgment and intuition. Take for example, the essential task of outlier detection during data preprocessing. This critical step requires careful consideration and input from banking experts. Mishandling outliers could distort results and potentially obscure valuable insights.
+
+Additionally, improving the model's effectiveness involves integrating economic indicators into the datasets. This task demands a deep comprehension of financial markets, a knowledge that seasoned experts possess. While ANNs excel at processing large volumes of data, they often lack the contextual understanding needed to interpret variables accurately within the dynamic landscape of economic indicators. Therefore, the input and insights of human analysts are crucial in ensuring the meaningful interpretation and prediction of the model.
 
 
