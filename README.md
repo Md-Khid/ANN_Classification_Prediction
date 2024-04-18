@@ -361,23 +361,18 @@ plt.title('Confusion Matrix')
 metrics_legend = f"Accuracy: {accuracy:.2f}\nPrecision: {precision:.2f}\nRecall (Sensitivity): {recall:.2f}\nF1 Score: {f1:.2f}\nSpecificity: {specificity:.2f}"
 plt.text(1.40, 0.5, metrics_legend, fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
 
-# Add total instances for each class below the legend box
-total_0_instances = np.sum(conf_matrix[0])
-total_1_instances = np.sum(conf_matrix[1])
-plt.text(1.30, 0.3, f'Total Instances of 0: {total_0_instances}', fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
-plt.text(1.30, 0.2, f'Total Instances of 1: {total_1_instances}', fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
-
 plt.show()
+
 ```
-![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/f15462cf-14d4-4b11-8c9a-88fd8c6e32c5)
+![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/a7d6af67-9894-4f4c-95b8-50b6ba014bb9)
 
 To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the chart:
 
 - Accuracy: Shows that 82% of all cases were accurately predicted by the model.
-- Precision: Indicates that 87% of the predicted Default cases were accurately identified as true positives.
-- Recall (Sensitivity): Shows that 76% of the actual Default cases were identified by the model.
+- Precision: Indicates that 89% of the predicted Default cases were accurately identified as true positives.
+- Recall (Sensitivity): Shows that 74% of the actual Default cases were identified by the model.
 - F1 Score: The model achieved a reasonable balance between precision and recall at 0.81. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
-- Specificity: Indicates that 88% of Non-Default cases were correctly predicted by the model.
+- Specificity: Indicates that 91% of Non-Default cases were correctly predicted by the model.
 
 #### Evaluation of Model - Receiver Operating Characteristic (ROC) Curve and Area Under the Curve (AUC)
 ```
@@ -402,12 +397,13 @@ plt.title('Receiver Operating Characteristic (ROC) Curve')
 plt.legend(loc='lower right')
 plt.show()
 ```
-![13](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/be188497-8eb4-494b-9e3c-e3730971a256)
+
+![13](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/29613030-2bcf-44cf-ba60-e57ae702dfc4)
 
 We can delve deeper into assessing and demonstrating the effectiveness of the ANN model by creating a ROC and AUC chart. Based on the chart:
 
 -ROC Curve: Both the training and testing ROC curves are notably above the diagonal red dashed line which signifies a no-skill classifier. This indicates that the model demonstrates strong predictive performance.
--AUC Value: The Area Under the Curve (AUC) for both the training and testing data is 0.90. This indicates that the model demonstrates a high degree of separability (where 0.50 denotes random chance) and can effectively differentiate between positive and negative classes.
+-AUC Value: The Area Under the Curve (AUC) for both the training and testing data is 0.91 and 0.90 respectively. This indicates that the model demonstrates a high degree of separability (where 0.50 denotes random chance) and can effectively differentiate between positive and negative classes.
 
 Evaluation of Model - Predictor of Importance
 ```
@@ -437,7 +433,7 @@ plt.gca().invert_yaxis()
 plt.show()
 ```
 
-![14](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/7a75de69-a78d-41f7-9982-8b5659d55b0d)
+![14](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/a9ed805e-2ccb-43c0-b553-73e90c7c1786)
 
 As the ANN model is often seen as a 'black box,' it can be difficult to figure out which factors truly affect the model's classification predictions. This is because of the complex multiple layers and parameters that are being used in the model’s algorithm. Therefore, it is important to determine the predictors that have the most impact on the model's predictions in order to gain insights into which inputs influence the model's decision-making process. This is particularly helpful for interpreting and identifying the key predictors that influence the model's predictions. These predictors can then be used to explain the model's behaviour to stakeholders or domain experts. Based to the chart:
 
