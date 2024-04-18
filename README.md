@@ -1,12 +1,12 @@
 # Project Overview
 
 ## Introduction
-For this project, we will analyse a credit facility dataset, which can be accessed from https://www.kaggle.com/datasets/laotse/credit-risk-dataset?resource=download. Employing Python coding within Jupyter Notebook, we will construct a machine learning model called Artificial Neural Network (ANN). The main goal of this analysis is to predict the 'loan_status' column assessing the likelihood of a current customer defaulting on their debt payment. [Dataset](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/credit_risk_dataset.csv)
-
+For this project, we will analyse a credit facility dataset, which can be accessed from https://www.kaggle.com/datasets/laotse/credit-risk-dataset?resource=download. Employing Python coding within Jupyter Notebook, we will construct a machine learning model called Artificial Neural Network (ANN). The main goal of this analysis is to predict the 'loan_status' column assessing the likelihood of a current customer defaulting on their debt payment. 
 ## Dataset Information
 
 ### Data Variables
-The dataset comprises various attributes pertaining to customers' profiles, including demographic details such as age, income, home ownership status and employment length. Additionally, it includes information on loan intent, grade, amount and interest rate. Crucial indicators like loan status, percentage of loan relative to income, default history and credit history length are also provided. This comprehensive collection of attributes offers insights into customers' profiles, enabling thorough analysis and informed decision-making in credit risk assessment and prediction.
+The dataset comprises various attributes pertaining to customers' profiles, including demographic details such as age, income, home ownership status and employment length. Additionally, it includes information on loan intent, grade, amount and interest rate. Crucial indicators like loan status, percentage of loan relative to income, default history and credit history length are also provided. This comprehensive collection of attributes offers insights into customers' profiles, enabling thorough analysis and informed decision-making in credit risk assessment and prediction. [Dataset](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/credit_risk_dataset.csv)
+
 
 ### Data Dictionary
 | Variable                    | Description                                     |
