@@ -114,6 +114,30 @@ columns_with_missing_values
 Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median, or mode depending on the data distribution.
 
 Fill missing values
+```
+# Fill missing values in 'person_emp_length' and 'loan_int_rate' columns with median
+df['person_emp_length'].fillna(df['person_emp_length'].median(), inplace=True)
+df['loan_int_rate'].fillna(df['loan_int_rate'].median(), inplace=True)
+
+# Display number of columns with missing values
+count_missing_values = df.isnull().sum().sum()
+count_missing_values
+```
+![5](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/cfac806a-7333-4784-a55f-21ac1378439d)
+
+Define special characters
+```
+# Define special characters
+special_chars = "!@#$%^&"
+
+# Iterate over each column 
+for column in df.columns:
+    # Iterate over each row in current column
+    for index, value in df[column].items():
+        # Check if value contains any special characters
+        if any(char in special_chars for char in str(value)):
+            print(f"Special characters found in column '{column}', row {index}: {value}")
+```
 
 
 
