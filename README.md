@@ -139,6 +139,25 @@ for column in df.columns:
             print(f"Special characters found in column '{column}', row {index}: {value}")
 ```
 
+## Exploratory Data Analysis 
+In this section, we will delve into comprehending the dataset. This encompasses tasks such as examining data distributions, identifying outliers, visualising correlations between variables and detecting any irregularities or trends, then transforming the insights obtained into valuable information.
+
+#### Scaling Numerical Features
+```
+# Define the list of numeric column names
+numeric_cols = ['person_age', 'person_income', 'person_emp_length', 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length']
+
+# Apply Min-Max scaling to numerical columns
+scaler = MinMaxScaler()
+df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+
+df
+```
+![6](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c5a735ab-8cde-48f7-872c-8c691b05b569)
+
+Scaling numerical variables in a dataset helps in understanding the relationships between variables, particularly when creating scatterplots and conducting correlation analysis. It ensures that variables are comparable on a similar scale, facilitating more accurate interpretation of their relationships.
+
+
 
 
 
