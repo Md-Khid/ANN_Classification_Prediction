@@ -2,10 +2,11 @@
 
 ## Introduction
 For this project, we will analyse a credit facility dataset, which can be accessed from https://www.kaggle.com/datasets/laotse/credit-risk-dataset?resource=download. Employing Python coding within Jupyter Notebook, we will construct a machine learning model called Artificial Neural Network (ANN). The main goal of this analysis is to predict the 'loan_status' column assessing the likelihood of a current customer defaulting on their debt payment. 
+
 ## Dataset Information
 
 ### Data Variables
-The dataset comprises various attributes pertaining to customers' profiles, including demographic details such as age, income, home ownership status and employment length. Additionally, it includes information on loan intent, grade, amount and interest rate. Crucial indicators like loan status, percentage of loan relative to income, default history and credit history length are also provided. This comprehensive collection of attributes offers insights into customers' profiles, enabling thorough analysis and informed decision-making in credit risk assessment and prediction. [Dataset](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/credit_risk_dataset.csv)
+The dataset consists of different details about customers' financial situations which include their personal information and factors related to loans. These details cover things like demographics, financial status and signs of how reliable they are with loans known as loan grade. These aspects form the basis of our analysis and the process of predicting outcomes . [Dataset](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/credit_risk_dataset.csv)
 
 
 ### Data Dictionary
@@ -23,3 +24,10 @@ The dataset comprises various attributes pertaining to customers' profiles, incl
 | loan_percent_income        | Percent Income                                  |
 | cb_person_default_on_file  | Credit Bureau-History Default: (No, Yes)        |
 | cb_person_cred_hist_length | Credit Bureau-Credit History Length             |
+
+
+## Data Preparation
+
+In this phase of data processing, we will refine the dataset for analysis by addressing missing values, handling special characters, and encoding variables. Additionally, we will import all necessary modules and libraries for the project and transform categorical variables into category columns for data visualisation purposes.
+
+
