@@ -183,7 +183,8 @@ def plot_corr_and_print_highly_correlated(df):
 plot_corr_and_print_highly_correlated(df)
 ```
 
-![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/6289c4b1-8e05-4eae-af8b-575c0f0788d6)
+![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d258118f-b6fd-4f17-9196-2790dfb50efb)
+
 
 Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
 
