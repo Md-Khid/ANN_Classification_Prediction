@@ -186,5 +186,51 @@ plot_corr_and_print_highly_correlated(df)
 
 Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
 
+#### Data Visualisation
+```
+# Define the list of variables for hue
+hue_variables = ['loan_status','person_home_ownership', 'loan_intent', 'loan_grade', 'cb_person_default_on_file']
+
+# Create subplots
+fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(35, 15))
+
+# Flatten axes for easier iteration
+axes = axes.flatten()
+
+# Iterate over hue variables and create subplots
+for i, hue_var in enumerate(hue_variables):
+    sns.scatterplot(data=df, x='loan_amnt', y='loan_int_rate', hue=hue_var, ax=axes[i])
+    axes[i].set_xlabel('Loan Amount')
+    axes[i].set_ylabel('Loan Percent Income')
+    
+    # Get handles and labels for the legend
+    handles, labels = axes[i].get_legend_handles_labels()
+    
+    # Create a custom legend with a title
+    axes[i].legend(handles=handles, labels=labels, title=hue_var, loc='center left', bbox_to_anchor=(1, 0.5))
+
+# Hide empty subplots
+for i in range(len(hue_variables), axes.size):
+    fig.delaxes(axes.flatten()[i])
+
+# Adjust layout
+plt.tight_layout()
+
+# Show the plot
+plt.show()
+```
+![8](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c1a91bac-4f5d-4ca8-8252-591ba0abb299)
+
+However, by colouring the plots with the categorical data columns, we can observe some interesting insights about the customers in the dataset. From the plots, we can observe the following points :
+Based on the Loan Status plot: The plot suggests a higher proportion of individuals classified as non-defaulters compared to defaulters. Moreover, there is an observed trend suggesting that default rates tend to rise as loan amounts increase. Notably, loans characterised by smaller amounts and lower interest rates exhibit a higher likelihood of being repaid resulting in a non-default status.
+
+Based on the Home Ownership plot: The plot suggests that individuals who rent or hold mortgages often apply for larger loan amounts. Interestingly, mortgagors appear to secure loans at comparatively lower interest rates compared to renters.
+
+Based on the Loan Intent plot: It seems there is no apparent correlation between the purpose of the loan and either the loan amount or interest rate. However, a notable concentration of data points is observed on the left-hand side of the plot. This concentration may suggest that the majority of borrowers regardless of their loan intent tend to seek loans with moderate amounts and are offered moderate interest rates.
+
+Based on the Loan Grade plot: The plot shows that loans assigned higher grades (A and B) correspond to lower interest rates while loans with lower grades (E and F) entail higher interest rates. Interestingly, there is no clear trend observed between the loan grade and the loan amount.
+
+Based on the Default on File plot: The plot suggests that individuals without a history of default tend to obtain loans across a broader range of amounts and generally at lower interest rates compared to those with a default record.
+
 
 
