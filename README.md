@@ -503,10 +503,13 @@ comparison_df
 
 Using the [test](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/Test.Data.csv) dataset, the trained ANN model accurately predicted about 85% for instances likely to be defaulters and non-defaulters. This indicates that the model generalized well to new data.
 
-Evaluation of Model - Predictor of Importance
+Predictor of Importance
 ```
+# Load the saved model
+model = keras.models.load_model('ANN.model.h5')
+
 # Get the column names from the DataFrame
-column_names = X_train.columns
+column_names = X_resampled.columns
 
 # Retrieve the weights of the first layer of the neural network model
 weights = model.layers[0].get_weights()[0]
@@ -524,14 +527,17 @@ sorted_feature_importance = dict(sorted(feature_importance.items(), key=lambda i
 top_5_features = dict(list(sorted_feature_importance.items())[:5])
 
 # Create a horizontal bar chart
+plt.figure(figsize=(10, 6))
 plt.barh(list(top_5_features.keys()), list(top_5_features.values()))
 plt.xlabel('Importance')
 plt.ylabel('Predictors')
+plt.title('Top 5 Features Importance')
 plt.gca().invert_yaxis() 
 plt.show()
 ```
 
-![14](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/a9ed805e-2ccb-43c0-b553-73e90c7c1786)
+
+![16](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/95e4dffa-17bf-44e8-9f3a-049622d6cc17)
 
 As the ANN model is often seen as a 'black box,' it can be difficult to figure out which factors truly affect the model's classification predictions. This is because of the complex multiple layers and parameters that are being used in the model’s algorithm. Therefore, it is important to determine the predictors that have the most impact on the model's predictions in order to gain insights into which inputs influence the model's decision-making process. This is particularly helpful for interpreting and identifying the key predictors that influence the model's predictions. These predictors can then be used to explain the model's behaviour to stakeholders or domain experts. Based to the chart:
 
@@ -542,8 +548,8 @@ As the ANN model is often seen as a 'black box,' it can be difficult to figure o
 5.	loan_intent_EDUCATION: This feature ranking fifth in importance indicates that the intent behind the loan, particularly when it’s for educational purposes, significantly influences the model’s predictions. This may be attributed to factors such as the high cost of education which could increase the likelihood of the event the model is predicting.
 
 
-### Discussion & Concluding Remarks
-Artificial Neural Networks (ANNs) offer a promising avenue for transforming credit risk assessment within the banking sector. However, it's crucial to recognise the vital role of human insight when analysing data. Even with advanced algorithms like ANNs, certain aspects of risk analysis rely on human judgment and intuition. Take for example, the essential task of outlier detection during data preprocessing. This critical step requires careful consideration and input from banking experts. Mishandling outliers could distort results and potentially obscure valuable insights.
+### Concluding Remarks
+Artificial Neural Networks (ANNs) offer a promising avenue for transforming credit risk assessment within the banking sector. However, it's crucial to recognise the vital role of human insight when analysing data. Even with advanced algorithms like ANNs, certain aspects of risk analysis rely on human judgment and intuition. Take for instance, the essential task of handling missing values and detecting outliers during data preprocessing. This critical step requires careful consideration and input from banking experts. Mishandling of missing values and outliers could distort results and potentially obscure valuable insights.
 
 Additionally, improving the model's effectiveness involves integrating economic indicators into the datasets. This task demands a deep comprehension of financial markets, a knowledge that seasoned experts possess. While ANNs excel at processing large volumes of data, they often lack the contextual understanding needed to interpret variables accurately within the dynamic landscape of economic indicators. Therefore, the input and insights of human analysts are crucial in ensuring the meaningful interpretation and prediction of the model.
 
