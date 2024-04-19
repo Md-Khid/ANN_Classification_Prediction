@@ -39,7 +39,7 @@ In this phase of data processing, we will refine the dataset for analysis by add
 #!pip install tensorflow
 
 import pandas as pd
-import numpy as np  
+import numpy as np
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder
 from imblearn.over_sampling import SMOTE
 import seaborn as sns
@@ -47,8 +47,12 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras.models import load_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
+
+# Set a standard seaborn colour palette
+sns.set_palette("colorblind")
 ```
 
 #### Loading and Categorising Loan Status in a Credit Risk Dataset
@@ -64,7 +68,7 @@ df['loan_status'] = df['loan_status'].map(loan_status_mapping)
 # Display the updated DataFrame
 df
 ```
-![1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d7246f0f-7126-4bbe-891b-344078058cb9)
+![1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/74e0c63b-fae4-4830-90a2-a2bc5deea269)
 
 
 #### Check Data Types 
@@ -73,7 +77,7 @@ df
 df.dtypes
 ```
 
-![2](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/0515c36a-a3fb-49c6-9337-e2667c17954e)
+![2](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/5e5fba1f-df18-45e6-bdb7-b3b8ff54a158)
 
 #### Create Descriptive Stats table
 ```
@@ -94,7 +98,8 @@ Descriptive_Stats = Descriptive_Stats.transpose()
 Descriptive_Stats
 ```
 
-![3](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/89902bff-0a51-4d02-93a6-47cbedd2e12d)
+
+![3](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/84593df1-73e6-4694-a293-1657cc54e8bc)
 
 By creating a descriptive statistics table, we can summarise important details about the dataset including central measures and spread for both categories and numbers. From the table, we notice that most customers are renting and have a good credit rating of A for their loans which are mainly for education. With an average customer age of 27 years, it seems likely that many in the dataset are working adults pursuing further studies. Moreover, we observe that the predictor column (loan_status) has imbalanced data where roughly 78% of entries fall under the Non-Default category. Interestingly, there is an anomalous Max value of 123 years contained in the "person_emp_length" column which will be addressed by removing it as an outlier.
 
@@ -110,7 +115,8 @@ columns_with_missing_values = missing_values[missing_values > 0]
 # Display columns with missing values
 columns_with_missing_values
 ```
-![4](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/06593c2d-5caa-4415-8515-8ed4dac12adc)
+
+![4](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/75816545-5fbd-4f55-9dcf-208cd45574a4)
 
 Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median, or mode depending on the data distribution.
 
@@ -124,7 +130,8 @@ df['loan_int_rate'].fillna(df['loan_int_rate'].median(), inplace=True)
 count_missing_values = df.isnull().sum().sum()
 count_missing_values
 ```
-![5](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/cfac806a-7333-4784-a55f-21ac1378439d)
+
+![5](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/2e57a7e7-2e1b-423c-9598-6767b8ba10a7)
 
 #### Define special characters
 ```
@@ -141,7 +148,6 @@ for column in df.columns:
 ```
 We will proceed with computing missing values for every column in the dataset and fill them with the suitable statistical value such as the median. Additionally, we will examine for any special characters that might impede the machine learning algorithm process.
 
-
 ## Exploratory Data Analysis 
 In this section, we will delve into comprehending the dataset. This encompasses tasks such as examining data distributions, identifying outliers, visualising correlations between variables and detecting any irregularities or trends, then transforming the insights obtained into valuable information.
 
@@ -153,10 +159,10 @@ numeric_cols = ['person_age', 'person_income', 'person_emp_length', 'loan_amnt',
 # Apply Min-Max scaling to numerical columns
 scaler = MinMaxScaler()
 df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
-
 df
 ```
-![6](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c5a735ab-8cde-48f7-872c-8c691b05b569)
+
+![6](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d078cfbc-b1e3-4799-8d6c-52a80eef9c9e)
 
 We will scale the numerical value columns in the dataset. This helps us understand how the variables relate to each other especially when making scatterplots and studying correlations. This ensures that the variables are standardised to a consistent scale, thereby facilitating accurate interpretation of their relationships.
 
@@ -183,7 +189,7 @@ def plot_corr_and_print_highly_correlated(df):
 # Call the function
 plot_corr_and_print_highly_correlated(df)
 ```
-![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/fe426d08-2053-4cb4-8c59-abaad0e1c460)
+![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/daa6459c-5d18-41f3-b478-44a261598ea7)
 
 Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
 
@@ -220,7 +226,7 @@ plt.tight_layout()
 # Show the plot
 plt.show()
 ```
-![8](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/c1a91bac-4f5d-4ca8-8252-591ba0abb299)
+![8](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/7d5eec17-ed2f-4efb-9acc-275733890a94)
 
 However, by colouring the plots with the categorical data columns, we can observe some interesting insights about the customers in the dataset. From the plots, we can observe the following points:
 
@@ -234,14 +240,13 @@ Based on the Loan Grade plot: The plot shows that loans assigned higher grades (
 
 Based on the Default on File plot: The plot suggests that individuals without a history of default tend to obtain loans across a broader range of amounts and generally at lower interest rates compared to those with a default record.
 
-
 #### Bar Chart
 ```
 # Select only the categorical columns
 categorical_columns = df.select_dtypes(include=['object', 'category']).columns.tolist()
 
 # Define subplot layout
-fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(12, 12))  # Adjust figure size if needed
+fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(12, 12)) 
 
 # Plot count for each unique item within each categorical column
 for i, ax in enumerate(axes.flatten()):
@@ -261,7 +266,7 @@ plt.tight_layout()
 # Show plot
 plt.show()
 ```
-![8 1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/93519de4-6b9d-40f5-a610-b3da498b60b6)
+![9](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/b964f51c-d149-4c0c-b21c-41d227419e6d)
 
 Based on the Home Ownership chart: The data indicates a higher number of renters compared to homeowners or mortgage holders. This trend may stem from various factors. For example, younger individuals or those in transitional life stages may prefer renting over owning a home. Economic aspects like housing affordability and credit accessibility could also influence this choice.
 
@@ -273,7 +278,6 @@ Based on the Loan Status chart: Analysis of 'Default' and 'Non-Default' statuses
 
 Based on the Credit Bureau Default on File chart: A significant proportion of individuals have no defaults recorded with the credit bureau. This serves as another positive indicator of their creditworthiness and may suggest a history of responsible borrowing practices
 
-
 #### Dummy Variables
 ```
 # Identify categorical columns
@@ -282,9 +286,7 @@ categorical_columns = df.select_dtypes(include=['object']).columns.tolist()
 # Remove loan_status from categorical_columns
 categorical_columns.remove('loan_status')
 
-# Perform one-hot encoding for categorical variables dropping the first level. 
-# We can skip the 'drop_first=True' for the dummy variable as multicollinearity isn't typically an issue for ANN 
-# as it is for linear regression. 
+# Perform one-hot encoding for categorical variables
 df = pd.get_dummies(df, columns=categorical_columns)
 
 # Map loan_status to {Non-Default=0, Default=1}
@@ -293,7 +295,7 @@ df['loan_status'] = df['loan_status'].map({'Non-Default': 0, 'Default': 1})
 # Display the resulting DataFrame
 df
 ```
-![9](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/b1b7d835-dcc6-41f8-b016-2f36aa881f8b)
+![10](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/5c9e32f6-5986-4f49-ad63-812dd251cdeb)
 
 By converting categorical variables into dummy variables and assigning the loan_status as (Non-Default=0, Default=1), we can prepare them for input into machine learning models. This ensures that categorical data seamlessly integrates into the modeling process, enhancing analysis and prediction tasks performed by the algorithms.
 
@@ -313,14 +315,14 @@ df = df[filtered_entries]
 # Check the shape of the DataFrame after removing outliers
 df.shape
 ```
-![10](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/96135433-7c02-41b8-9c53-61e6924aa431)
+![11](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/0e696da7-0fc0-4f07-8272-7d1faf8f4e70)
 
 We will be excluding any outliers found in the dataset. This is because outliers can greatly affect how the model parameters are estimated especially for the ANN loss function during data training. By removing these outliers, we can create a more precise and reliable ANN model.
 
 #### Class Imbalance Correction Using SMOTE
 ```
-X = df.drop(columns=['loan_status'])  # Features
-y = df['loan_status']  # Target variable
+X = df.drop(columns=['loan_status'])  
+y = df['loan_status']  
 
 # Initialize SMOTE
 smote = SMOTE()
@@ -328,35 +330,39 @@ smote = SMOTE()
 # Perform SMOTE
 X_resampled, y_resampled = smote.fit_resample(X, y)
 
+# Save X_resampled and y_resampled to CSV
+X_resampled.to_csv('X_resampled.csv', index=False)
+y_resampled.to_csv('y_resampled.csv', index=False)
+
 # Before SMOTE
 plt.figure(figsize=(10, 5))
 plt.subplot(1, 2, 1)
 plt.title('Before SMOTE')
 counts = df['loan_status'].value_counts().sort_index()
-counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(counts) / 100), colors=['skyblue', 'lightcoral'])
+counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(counts) / 100))
 plt.ylabel('')
 
 # After SMOTE
 plt.subplot(1, 2, 2)
 plt.title('After SMOTE')
 resampled_counts = y_resampled.value_counts().sort_index()
-resampled_counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(resampled_counts) / 100), colors=['skyblue', 'lightcoral'])
+resampled_counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(resampled_counts) / 100))
 plt.ylabel('')
 
 plt.show()
 ```
-![11](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/ae801d77-6263-40b6-8aa5-974904afae98)
+![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/58f66107-ed1b-42b7-ae00-048d89b348d7)
 
 To address the imbalance in the predictor column (loan_status) as mentioned earlier, we will use SMOTE to oversample the minority class (Default=1) to align with the majority class (Non-Default=0). Upon applying SMOTE, we can see that both classes now have equal balanced representation.
 
 ### ANN Model Training for Loan Status Prediction
 ```
 # Separate features and target variable
-X = X_resampled  # Features after SMOTE
-y = y_resampled  # Target variable after SMOTE
-
+X = X_resampled  
+y = y_resampled 
+    
 # Split the data into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=12345)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # Build the ANN model
 model = keras.Sequential([
@@ -402,18 +408,23 @@ plt.title('Confusion Matrix')
 metrics_legend = f"Accuracy: {accuracy:.2f}\nPrecision: {precision:.2f}\nRecall (Sensitivity): {recall:.2f}\nF1 Score: {f1:.2f}\nSpecificity: {specificity:.2f}"
 plt.text(1.40, 0.5, metrics_legend, fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
 
+# Add total instances for each class below the legend box
+total_0_instances = np.sum(conf_matrix[0])
+total_1_instances = np.sum(conf_matrix[1])
+plt.text(1.30, 0.3, f'Total Instances of 0: {total_0_instances}', fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
+plt.text(1.30, 0.2, f'Total Instances of 1: {total_1_instances}', fontsize=12, ha='left', va='center', transform=plt.gca().transAxes, bbox=dict(facecolor='white', alpha=0.5))
 plt.show()
 
 ```
-![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/a7d6af67-9894-4f4c-95b8-50b6ba014bb9)
+![13](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/48dd6ece-3c98-4200-b778-a2085bae0e40)
 
 To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the chart:
 
 - Accuracy: Shows that 82% of all cases were accurately predicted by the model.
-- Precision: Indicates that 89% of the predicted Default cases were accurately identified as true positives.
-- Recall (Sensitivity): Shows that 74% of the actual Default cases were identified by the model.
+- Precision: Indicates that 87% of the predicted Default cases were accurately identified as true positives.
+- Recall (Sensitivity): Shows that 76% of the actual Default cases were identified by the model.
 - F1 Score: The model achieved a reasonable balance between precision and recall at 0.81. This suggests that it can effectively identify relevant instances (high recall) while also minimising false positives (high precision).
-- Specificity: Indicates that 91% of Non-Default cases were correctly predicted by the model.
+- Specificity: Indicates that 89% of Non-Default cases were correctly predicted by the model.
 
 #### Evaluation of Model - Receiver Operating Characteristic (ROC) Curve and Area Under the Curve (AUC)
 ```
@@ -439,12 +450,58 @@ plt.legend(loc='lower right')
 plt.show()
 ```
 
-![13](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/29613030-2bcf-44cf-ba60-e57ae702dfc4)
+![14](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/4a226ba9-7ca0-42a8-ab92-0e34d7da1653)
 
 We can delve deeper into assessing and demonstrating the effectiveness of the ANN model by creating a ROC and AUC chart. Based on the chart:
 
 -ROC Curve: Both the training and testing ROC curves are notably above the diagonal red dashed line which signifies a no-skill classifier. This indicates that the model demonstrates strong predictive performance.
 -AUC Value: The Area Under the Curve (AUC) for both the training and testing data is 0.91 and 0.90 respectively. This indicates that the model demonstrates a high degree of separability (where 0.50 denotes random chance) and can effectively differentiate between positive and negative classes.
+
+## Evaluate Model Performance
+
+#### Save Trained Model
+```
+# Load the new data from CSV
+test = pd.read_csv('Test.data.csv')
+
+# Define the list of numeric column names
+numeric_cols = ['person_age', 'person_income', 'person_emp_length', 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length']
+
+# Apply Min-Max scaling to numerical columns
+scaler = MinMaxScaler()
+test[numeric_cols] = scaler.fit_transform(test[numeric_cols])
+
+# Identify categorical columns
+categorical_columns = test.select_dtypes(include=['object']).columns.tolist()
+
+# Perform one-hot encoding for categorical variables
+test = pd.get_dummies(test, columns=categorical_columns)
+
+# Load the model and perform prediction
+model = load_model('ANN.model.h5')
+
+# Use X_test features for prediction
+X_test = test.drop('loan_status', axis=1) 
+predictions = model.predict(X_test)
+
+# Convert probabilities into class labels
+threshold = 0.5
+class_predictions = [0 if pred < threshold else 1 for pred in predictions]
+
+# Compare actual and predicted loan_status values
+actual_loan_status = test['loan_status'].values
+predicted_loan_status = class_predictions
+
+# Create a DataFrame to compare actual and predicted loan_status values
+comparison_df = pd.DataFrame({'Actual_loan_status': actual_loan_status, 'Predicted_loan_status': predicted_loan_status})
+
+# Print the comparison DataFrame
+comparison_df
+```
+
+![15](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d6518c2e-e977-456b-b5dd-6bf8c3b347ea)
+
+Using the test dataset, the trained ANN model accurately predicted about 85% for instances likely to be defaulters and non-defaulters. This indicates that the model generalized well to new data.
 
 Evaluation of Model - Predictor of Importance
 ```
