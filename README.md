@@ -236,7 +236,7 @@ Based on the Default on File plot: The plot suggests that individuals without a 
 
 
 #### Bar Chart
-~~~
+```
 # Select only the categorical columns
 categorical_columns = df.select_dtypes(include=['object', 'category']).columns.tolist()
 
