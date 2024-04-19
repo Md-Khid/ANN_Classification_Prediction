@@ -501,7 +501,7 @@ comparison_df
 
 ![15](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d6518c2e-e977-456b-b5dd-6bf8c3b347ea)
 
-Using the test dataset, the trained ANN model accurately predicted about 85% for instances likely to be defaulters and non-defaulters. This indicates that the model generalized well to new data.
+Using the [test](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/Test.Data.csv) dataset, the trained ANN model accurately predicted about 85% for instances likely to be defaulters and non-defaulters. This indicates that the model generalized well to new data.
 
 Evaluation of Model - Predictor of Importance
 ```
