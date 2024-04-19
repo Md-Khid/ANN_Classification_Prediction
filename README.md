@@ -118,7 +118,7 @@ columns_with_missing_values
 
 ![4](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/75816545-5fbd-4f55-9dcf-208cd45574a4)
 
-Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median, or mode depending on the data distribution.
+Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median or mode depending on the data distribution.
 
 #### Fill missing values
 ```
