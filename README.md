@@ -464,6 +464,11 @@ We can delve deeper into assessing and demonstrating the effectiveness of the AN
 
 #### Save Trained Model
 ```
+# Save the trained model
+model.save('ANN.model.h5')
+```
+#### Feed New Data Into Trained Model
+```
 # Load the new data from CSV
 test = pd.read_csv('Test.data.csv')
 
