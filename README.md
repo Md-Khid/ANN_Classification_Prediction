@@ -230,15 +230,17 @@ plt.show()
 
 However, by colouring the plots with the categorical data columns, we can observe some interesting insights about the customers in the dataset. From the plots, we can observe the following points:
 
-Based on the Loan Status plot: The plot suggests a higher proportion of individuals classified as non-defaulters compared to defaulters. Moreover, there is an observed trend suggesting that default rates tend to rise as loan amounts increase. Notably, loans characterised by smaller amounts and lower interest rates exhibit a higher likelihood of being repaid resulting in a non-default status.
 
-Based on the Home Ownership plot: The plot suggests that individuals who rent or hold mortgages often apply for larger loan amounts.  Interestingly, most of the lenders are from the mortgagors and renters group.
+Based on the Loan Status plot: The plot suggests a higher proportion of individuals classified as non-defaulters compared to defaulters. Moreover, there is an observed trend suggesting that default rates tend to rise as loan amounts increase. Notably, loans characterised by smaller amounts and lower loan percent income exhibit a higher likelihood of being repaid resulting in a non-default status.
 
-Based on the Loan Intent plot: It seems there is no apparent correlation between the purpose of the loan and either the loan amount or interest rate. However, a notable concentration of data points is observed on the left-hand side of the plot. This concentration may suggest that the majority of borrowers regardless of their loan intent tend to seek loans with moderate amounts and are offered moderate interest rates.
+Based on the Home Ownership plot: The plot suggests that individuals who rent or hold mortgages often apply for larger loan amounts. Interestingly, most of the borrowers are from the mortgagors and renters group.
 
-Based on the Loan Grade plot: The plot shows that loans assigned higher grades (A and B) correspond to lower interest rates while loans with lower grades (E and F) entail higher interest rates. Interestingly, there is no clear trend observed between the loan grade and the loan amount.
+Based on the Loan Intent plot: It seems there is no apparent correlation between the purpose of the loan and either the loan amount or loan percent income. However, a notable concentration of data points is observed on the left-hand side of the plot. This concentration may suggest that the majority of borrowers, regardless of their loan intent, tend to seek loans with moderate amounts and are offered moderate loan amounts relative to their income.
+
+Based on the Loan Grade plot: The plot shows that loans assigned higher grades (A and B) correspond to lower loan percent income, while loans with lower grades (E and F) entail higher loan percent income. This could suggest that higher grades (like A and B) tend to have borrowers who owe less relative to their income. On the other hand, loans with lower grades (E and F) have borrowers who owe more relative to their income, indicating higher financial risk.
 
 Based on the Default on File plot: The plot suggests that individuals without a history of default tend to obtain loans across a broader range of amounts and generally at lower interest rates compared to those with a default record.
+
 
 #### Bar Chart
 ```
