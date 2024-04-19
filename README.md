@@ -234,6 +234,46 @@ Based on the Loan Grade plot: The plot shows that loans assigned higher grades (
 
 Based on the Default on File plot: The plot suggests that individuals without a history of default tend to obtain loans across a broader range of amounts and generally at lower interest rates compared to those with a default record.
 
+
+#### Bar Chart
+~~~
+# Select only the categorical columns
+categorical_columns = df.select_dtypes(include=['object', 'category']).columns.tolist()
+
+# Define subplot layout
+fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(12, 12))  # Adjust figure size if needed
+
+# Plot count for each unique item within each categorical column
+for i, ax in enumerate(axes.flatten()):
+    if i < len(categorical_columns):
+        column = categorical_columns[i]
+        order = df[column].value_counts().index  # Arrange the bars from highest to lowest count
+        sns.countplot(x=column, data=df, order=order, ax=ax)
+        ax.set_title('')
+        ax.set_ylabel('')  # Remove the ylabel
+        ax.tick_params(axis='x', rotation=45)  # Rotate x-labels by 45 degrees
+    else:
+        fig.delaxes(ax)  # Hide empty subplot
+
+# Adjust layout
+plt.tight_layout()
+
+# Show plot
+plt.show()
+```
+![8 1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/93519de4-6b9d-40f5-a610-b3da498b60b6)
+
+Based on the Home Ownership chart: The data indicates a higher number of renters compared to homeowners or mortgage holders. This trend may stem from various factors. For example, younger individuals or those in transitional life stages may prefer renting over owning a home. Economic aspects like housing affordability and credit accessibility could also influence this choice.
+
+Based on the Loan Intent chart: The majority of loans are designated for 'Education'. This trend may imply that many individuals, particularly younger ones pursuing further education, seek financial aid to manage the escalating costs of education.
+
+Based on the Loan Grade chart: Most loans fall into grades 'A' and 'B'. This suggests that a considerable number of individuals maintain commendable creditworthiness. This likely reflects their financial prudence and effective debt management skills.
+
+Based on the Loan Status chart: Analysis of 'Default' and 'Non-Default' statuses reveals that the majority of loans are 'Non-Default'. This indicates successful loan repayment management by most individuals. However, the presence of 'Default' loans underscores the financial challenges faced by some individuals.
+
+Based on the Credit Bureau Default on File chart: A significant proportion of individuals have no defaults recorded with the credit bureau. This serves as another positive indicator of their creditworthiness and may suggest a history of responsible borrowing practices
+
+
 #### Dummy Variables
 ```
 # Identify categorical columns
