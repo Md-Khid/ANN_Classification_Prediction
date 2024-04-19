@@ -232,7 +232,7 @@ However, by colouring the plots with the categorical data columns, we can observ
 
 Based on the Loan Status plot: The plot suggests a higher proportion of individuals classified as non-defaulters compared to defaulters. Moreover, there is an observed trend suggesting that default rates tend to rise as loan amounts increase. Notably, loans characterised by smaller amounts and lower interest rates exhibit a higher likelihood of being repaid resulting in a non-default status.
 
-Based on the Home Ownership plot: The plot suggests that individuals who rent or hold mortgages often apply for larger loan amounts. Interestingly, mortgagors appear to secure loans at comparatively lower interest rates compared to renters.
+Based on the Home Ownership plot: The plot suggests that individuals who rent or hold mortgages often apply for larger loan amounts. 
 
 Based on the Loan Intent plot: It seems there is no apparent correlation between the purpose of the loan and either the loan amount or interest rate. However, a notable concentration of data points is observed on the left-hand side of the plot. This concentration may suggest that the majority of borrowers regardless of their loan intent tend to seek loans with moderate amounts and are offered moderate interest rates.
 
