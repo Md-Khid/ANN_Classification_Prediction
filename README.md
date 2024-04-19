@@ -420,7 +420,7 @@ plt.show()
 ```
 ![13](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/48dd6ece-3c98-4200-b778-a2085bae0e40)
 
-To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the chart:
+To assess how well the ANN model performs, we employ various matrices to gauge its predictive ability. We will create a confusion matrix and analyse its performance metrics in predicting the loan_status outcome. Based on the matrix:
 
 - Accuracy: Shows that 82% of all cases were accurately predicted by the model.
 - Precision: Indicates that 87% of the predicted Default cases were accurately identified as true positives.
