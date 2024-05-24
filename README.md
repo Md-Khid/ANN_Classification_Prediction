@@ -110,28 +110,6 @@ To assess how well the ANN model performs, we employ various matrices to gauge i
 - Specificity: Indicates that 89% of Non-Default cases were correctly predicted by the model.
 
 #### Evaluation of Model - Receiver Operating Characteristic (ROC) Curve and Area Under the Curve (AUC)
-```
-# Calculate ROC curve and AUC for training set
-fpr_train, tpr_train, _ = roc_curve(y_train, model.predict(X_train))
-auc_train = auc(fpr_train, tpr_train)
-
-# Calculate ROC curve and AUC for testing set
-fpr_test, tpr_test, _ = roc_curve(y_test, model.predict(X_test))
-auc_test = auc(fpr_test, tpr_test)
-
-# Plot both ROC curves
-plt.figure(figsize=(8, 6))
-plt.plot(fpr_train, tpr_train, color='blue', lw=2, label='Train ROC curve (AUC = {:.2f})'.format(auc_train))
-plt.plot(fpr_test, tpr_test, color='orange', lw=2, label='Test ROC curve (AUC = {:.2f})'.format(auc_test))
-plt.plot([0, 1], [0, 1], color='red', linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic (ROC) Curve')
-plt.legend(loc='lower right')
-plt.show()
-```
 
 ![14](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/4a226ba9-7ca0-42a8-ab92-0e34d7da1653)
 
@@ -143,92 +121,16 @@ We can delve deeper into assessing and demonstrating the effectiveness of the AN
 
 ## Evaluate Model Performance
 
-#### Save Trained Model
-```
-# Save the trained model
-model.save('ANN.model.h5')
-```
 #### Feed New Data Into Trained Model
-```
-# Load the new data from CSV
-test = pd.read_csv('Test.data.csv')
-
-# Define the list of numeric column names
-numeric_cols = ['person_age', 'person_income', 'person_emp_length', 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length']
-
-# Apply Min-Max scaling to numerical columns
-scaler = MinMaxScaler()
-test[numeric_cols] = scaler.fit_transform(test[numeric_cols])
-
-# Identify categorical columns
-categorical_columns = test.select_dtypes(include=['object']).columns.tolist()
-
-# Perform one-hot encoding for categorical variables
-test = pd.get_dummies(test, columns=categorical_columns)
-
-# Load the model and perform prediction
-model = load_model('ANN.model.h5')
-
-# Use X_test features for prediction
-X_test = test.drop('loan_status', axis=1) 
-predictions = model.predict(X_test)
-
-# Convert probabilities into class labels
-threshold = 0.5
-class_predictions = [0 if pred < threshold else 1 for pred in predictions]
-
-# Compare actual and predicted loan_status values
-actual_loan_status = test['loan_status'].values
-predicted_loan_status = class_predictions
-
-# Create a DataFrame to compare actual and predicted loan_status values
-comparison_df = pd.DataFrame({'Actual_loan_status': actual_loan_status, 'Predicted_loan_status': predicted_loan_status})
-
-# Print the comparison DataFrame
-comparison_df
-```
-
 ![15](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d6518c2e-e977-456b-b5dd-6bf8c3b347ea)
 
 Using the [test](https://github.com/Md-Khid/ANN_Classification_Prediction/blob/main/Test.Data.csv) dataset, the trained ANN model accurately predicted about 85% for instances likely to be defaulters and non-defaulters. This indicates that the trained model generalised well to new data.
 
 Predictor of Importance
-```
-# Load the saved model
-model = keras.models.load_model('ANN.model.h5')
-
-# Get the column names from the DataFrame
-column_names = X_resampled.columns
-
-# Retrieve the weights of the first layer of the neural network model
-weights = model.layers[0].get_weights()[0]
-
-# Calculate the absolute sum of weights for each feature
-feature_weights_sum = abs(weights).sum(axis=0)
-
-# Create a dictionary of feature names and their importance
-feature_importance = dict(zip(column_names, feature_weights_sum))
-
-# Sort the dictionary by value in descending order
-sorted_feature_importance = dict(sorted(feature_importance.items(), key=lambda item: item[1], reverse=True))
-
-# Select the top 5 features
-top_5_features = dict(list(sorted_feature_importance.items())[:5])
-
-# Create a horizontal bar chart
-plt.figure(figsize=(10, 6))
-plt.barh(list(top_5_features.keys()), list(top_5_features.values()))
-plt.xlabel('Importance')
-plt.ylabel('Predictors')
-plt.title('Top 5 Features Importance')
-plt.gca().invert_yaxis() 
-plt.show()
-```
-
 
 ![16](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/95e4dffa-17bf-44e8-9f3a-049622d6cc17)
 
-As the ANN model is often seen as a 'black box,' it can be difficult to figure out which factors truly affect the model's classification predictions. This is because of the complex multiple layers and parameters that are being used in the model’s algorithm. Therefore, it is important to determine the predictors that have the most impact on the model's predictions in order to gain insights into which inputs influence the model's decision-making process. This is particularly helpful for interpreting and identifying the key predictors that influence the model's predictions. These predictors can then be used to explain the model's behaviour to stakeholders or domain experts. Based to the features:
+As the ANN model is often seen as a 'black box,' it is important to determine the predictors that have the most impact on the model's predictions in order to gain insights into which inputs influence the model's decision-making process. This is particularly helpful for interpreting and identifying the key predictors that influence the model's predictions. Based to the features:
 
 1.	person_home_ownership_RENT: This emerges as the most critical predictor. It suggests that the home ownership status particularly renting, has a significant influence on the model’s predictions. This could be due to various factors such as financial instability associated with renting. Thereby, increasing the risk of the event the model is predicting.
 2.	loan_intent_PERSONAL: This feature ranks as the second most important. It indicates that the intent behind the loan, especially when it’s for personal use, strongly correlates with the outcome predicted by the model. This might be attributed to the fact that personal loans can be used for a variety of purposes, some of which might carry a higher risk.
