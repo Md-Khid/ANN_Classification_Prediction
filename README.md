@@ -31,10 +31,6 @@ By creating a descriptive statistics table, we can summarise important details a
 
 Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median or mode depending on the data distribution.
 
-#### Fill missing values
-
-![5](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/2e57a7e7-2e1b-423c-9598-6767b8ba10a7)
-
 #### Define special characters
 
 We will proceed with computing missing values for every column in the dataset and fill them with the suitable statistical value such as the median. Additionally, we will examine for any special characters that might impede the machine learning algorithm process.
