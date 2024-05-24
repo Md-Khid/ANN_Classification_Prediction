@@ -29,94 +29,28 @@ By creating a descriptive statistics table, we can summarise important details a
 
 ![4](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/75816545-5fbd-4f55-9dcf-208cd45574a4)
 
-Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median or mode depending on the data distribution.
-
-#### Define special characters
-
-We will proceed with computing missing values for every column in the dataset and fill them with the suitable statistical value such as the median. Additionally, we will examine for any special characters that might impede the machine learning algorithm process.
+Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median or mode depending on the data distribution. Additionally, we will also examine for any special characters that might impede the machine learning algorithm process.
 
 ## Exploratory Data Analysis 
 In this section, we will delve into comprehending the dataset. This encompasses tasks such as examining data distributions, identifying outliers, visualising correlations between variables and detecting any irregularities or trends, then transforming the insights obtained into valuable information.
 
 #### Scaling Numerical Features
-```
-# Define the list of numeric column names
-numeric_cols = ['person_age', 'person_income', 'person_emp_length', 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length']
-
-# Apply Min-Max scaling to numerical columns
-scaler = MinMaxScaler()
-df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
-df
-```
 
 ![6](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/d078cfbc-b1e3-4799-8d6c-52a80eef9c9e)
 
-We will scale the numerical value columns in the dataset. This helps us understand how the variables relate to each other especially when making scatterplots and studying correlations. This ensures that the variables are standardised to a consistent scale, thereby facilitating accurate interpretation of their relationships.
+We will scale the numerical value columns in the dataset. This ensures that the variables are standardised to a consistent scale, thereby facilitating accurate interpretation of their relationships.
 
 #### Correlation Matrix Plot
-```
-def plot_corr_and_print_highly_correlated(df):
-    # Calculate correlation matrix for numeric columns
-    corr_matrix = df.select_dtypes(include='number').corr()
 
-    # Plot heatmap
-    plt.figure(figsize=(10, 5))  # Specify the figure size
-    sns.heatmap(corr_matrix, annot=True, fmt=".2f", linewidths=.5, xticklabels=corr_matrix.columns, yticklabels=corr_matrix.columns, cbar_kws={'orientation': 'vertical'})
-    plt.xticks(rotation=45)  # Rotate x-axis labels by 45 degrees
-    plt.show()
-
-    # Print highly correlated pairs
-    print("Highly Correlated Features:")
-    for i in range(len(corr_matrix.columns)):
-        for j in range(i):
-            if abs(corr_matrix.iloc[i, j]) > 0.8: 
-                pair = (corr_matrix.columns[i], corr_matrix.columns[j])
-                print(pair)
-
-# Call the function
-plot_corr_and_print_highly_correlated(df)
-```
 ![7](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/daa6459c-5d18-41f3-b478-44a261598ea7)
 
 Upon examining the correlation plot, it is apparent that there is not significant correlation among the column variables except for the 'cb_person_cred_hist_length' and 'person_age' columns.
 
 #### Scatterplot
-```
-# Define the list of variables for hue
-hue_variables = ['loan_status','person_home_ownership', 'loan_intent', 'loan_grade', 'cb_person_default_on_file']
 
-# Create subplots
-fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(35, 15))
-
-# Flatten axes for easier iteration
-axes = axes.flatten()
-
-# Iterate over hue variables and create subplots
-for i, hue_var in enumerate(hue_variables):
-    sns.scatterplot(data=df, x='loan_amnt', y='loan_int_rate', hue=hue_var, ax=axes[i])
-    axes[i].set_xlabel('Loan Amount')
-    axes[i].set_ylabel('Loan Percent Income')
-    
-    # Get handles and labels for the legend
-    handles, labels = axes[i].get_legend_handles_labels()
-    
-    # Create a custom legend with a title
-    axes[i].legend(handles=handles, labels=labels, title=hue_var, loc='center left', bbox_to_anchor=(1, 0.5))
-
-# Hide empty subplots
-for i in range(len(hue_variables), axes.size):
-    fig.delaxes(axes.flatten()[i])
-
-# Adjust layout
-plt.tight_layout()
-
-# Show the plot
-plt.show()
-```
 ![8](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/7d5eec17-ed2f-4efb-9acc-275733890a94)
 
 However, by colouring the plots with the categorical data columns, we can observe some interesting insights about the customers in the dataset. From the plots, we can observe the following points:
-
 
 Based on the Loan Status plot: The plot suggests a higher proportion of individuals classified as non-defaulters compared to defaulters. Moreover, there is an observed trend suggesting that default rates tend to rise as loan amounts increase. Notably, loans characterised by smaller amounts and lower loan percent income exhibit a higher likelihood of being repaid resulting in a non-default status.
 
@@ -130,31 +64,7 @@ Based on the Default on File plot: The plot suggests that individuals without a 
 
 
 #### Bar Chart
-```
-# Select only the categorical columns
-categorical_columns = df.select_dtypes(include=['object', 'category']).columns.tolist()
 
-# Define subplot layout
-fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(12, 12)) 
-
-# Plot count for each unique item within each categorical column
-for i, ax in enumerate(axes.flatten()):
-    if i < len(categorical_columns):
-        column = categorical_columns[i]
-        order = df[column].value_counts().index  # Arrange the bars from highest to lowest count
-        sns.countplot(x=column, data=df, order=order, ax=ax)
-        ax.set_title('')
-        ax.set_ylabel('')  # Remove the ylabel
-        ax.tick_params(axis='x', rotation=45)  # Rotate x-labels by 45 degrees
-    else:
-        fig.delaxes(ax)  # Hide empty subplot
-
-# Adjust layout
-plt.tight_layout()
-
-# Show plot
-plt.show()
-```
 ![9](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/b964f51c-d149-4c0c-b21c-41d227419e6d)
 
 Based on the Home Ownership chart: The data indicates a higher number of renters compared to homeowners or mortgage holders. This trend may stem from various factors. For example, younger individuals or those in transitional life stages may prefer renting over owning a home. Economic aspects like housing affordability and credit accessibility could also influence this choice.
@@ -168,78 +78,19 @@ Based on the Loan Status chart: Analysis of 'Default' and 'Non-Default' statuses
 Based on the Credit Bureau Default on File chart: A significant proportion of individuals have no defaults recorded with the credit bureau. This serves as another positive indicator of their creditworthiness and may suggest a history of responsible borrowing practices
 
 #### Dummy Variables
-```
-# Identify categorical columns
-categorical_columns = df.select_dtypes(include=['object']).columns.tolist()
 
-# Remove loan_status from categorical_columns
-categorical_columns.remove('loan_status')
-
-# Perform one-hot encoding for categorical variables
-df = pd.get_dummies(df, columns=categorical_columns)
-
-# Map loan_status to {Non-Default=0, Default=1}
-df['loan_status'] = df['loan_status'].map({'Non-Default': 0, 'Default': 1})
-
-# Display the resulting DataFrame
-df
-```
 ![10](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/5c9e32f6-5986-4f49-ad63-812dd251cdeb)
 
 By converting categorical variables into dummy variables and assigning the loan_status as (Non-Default=0, Default=1), we can prepare them for input into machine learning models. This ensures that categorical data seamlessly integrates into the modeling process, enhancing analysis and prediction tasks performed by the algorithms.
 
 #### Remove Outliers
-```
-# Select numeric columns
-numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
 
-# Detect outliers using z-score
-z_scores = stats.zscore(df[numeric_cols])
-abs_z_scores = abs(z_scores)
-filtered_entries = (abs_z_scores < 3).all(axis=1)
-
-# Remove outliers from DataFrame
-df = df[filtered_entries]
-
-# Check the shape of the DataFrame after removing outliers
-df.shape
-```
 ![11](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/0e696da7-0fc0-4f07-8272-7d1faf8f4e70)
 
-We will be excluding any outliers found in the dataset. This is because outliers can greatly affect how the model parameters are estimated especially for the ANN loss function during data training. By removing these outliers, we can create a more precise and reliable ANN model.
+We will be excluding any outliers found in the dataset. This is because outliers can greatly affect the precision and reliability of the  ANN model.
 
 #### Class Imbalance Correction Using SMOTE
-```
-X = df.drop(columns=['loan_status'])  
-y = df['loan_status']  
 
-# Initialize SMOTE
-smote = SMOTE()
-
-# Perform SMOTE
-X_resampled, y_resampled = smote.fit_resample(X, y)
-
-# Save X_resampled and y_resampled to CSV
-X_resampled.to_csv('X_resampled.csv', index=False)
-y_resampled.to_csv('y_resampled.csv', index=False)
-
-# Before SMOTE
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-plt.title('Before SMOTE')
-counts = df['loan_status'].value_counts().sort_index()
-counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(counts) / 100))
-plt.ylabel('')
-
-# After SMOTE
-plt.subplot(1, 2, 2)
-plt.title('After SMOTE')
-resampled_counts = y_resampled.value_counts().sort_index()
-resampled_counts.plot(kind='pie', autopct=lambda p: '{:.1f}% ({:,.0f})'.format(p, p * sum(resampled_counts) / 100))
-plt.ylabel('')
-
-plt.show()
-```
 ![12](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/58f66107-ed1b-42b7-ae00-048d89b348d7)
 
 To address the imbalance in the predictor column (loan_status) as mentioned earlier, we will use SMOTE to oversample the minority class (Default=1) to align with the majority class (Non-Default=0). Upon applying SMOTE, we can see that both classes now have equal balanced representation.
