@@ -10,40 +10,15 @@ The dataset consists of different details about customers' financial situations 
 
 ### Data Pre-processing:
 
-#### Import Python Libraries and Modules for Data Preprocessing, Modelling and Evaluation
-
 #### Loading and Categorising Loan Status in a Credit Risk Dataset
 
 ![1](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/74e0c63b-fae4-4830-90a2-a2bc5deea269)
 
-
 #### Check Data Types 
-```
-# Check data types of each column
-df.dtypes
-```
 
 ![2](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/5e5fba1f-df18-45e6-bdb7-b3b8ff54a158)
 
 #### Create Descriptive Stats table
-```
-# Create Descriptive Stats table 
-Descriptive_Stats = df.describe(include='all').round(2)
-
-# Separate columns into categorical and numerical groups
-categorical_columns = Descriptive_Stats.select_dtypes(include=['object']).columns
-numeric_columns = Descriptive_Stats.select_dtypes(exclude=['object']).columns
-
-# Order columns (categorical followed by numerical)
-ordered_columns = list(categorical_columns) + list(numeric_columns)
-Descriptive_Stats = Descriptive_Stats.reindex(ordered_columns, axis=1)
-
-# Transpose Descriptive Stats table 
-Descriptive_Stats = Descriptive_Stats.transpose()
-
-Descriptive_Stats
-```
-
 
 ![3](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/84593df1-73e6-4694-a293-1657cc54e8bc)
 
@@ -51,47 +26,17 @@ By creating a descriptive statistics table, we can summarise important details a
 
 
 #### Identify Columns with Missing Values
-```
-# Calculate number of missing values 
-missing_values = df.isnull().sum()
-
-# Filter the missing_values
-columns_with_missing_values = missing_values[missing_values > 0]
-
-# Display columns with missing values
-columns_with_missing_values
-```
 
 ![4](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/75816545-5fbd-4f55-9dcf-208cd45574a4)
 
 Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median or mode depending on the data distribution.
 
 #### Fill missing values
-```
-# Fill missing values in 'person_emp_length' and 'loan_int_rate' columns with median
-df['person_emp_length'].fillna(df['person_emp_length'].median(), inplace=True)
-df['loan_int_rate'].fillna(df['loan_int_rate'].median(), inplace=True)
-
-# Display number of columns with missing values
-count_missing_values = df.isnull().sum().sum()
-count_missing_values
-```
 
 ![5](https://github.com/Md-Khid/ANN_Classification_Prediction/assets/160820522/2e57a7e7-2e1b-423c-9598-6767b8ba10a7)
 
 #### Define special characters
-```
-# Define special characters
-special_chars = "!@#$%^&"
 
-# Iterate over each column 
-for column in df.columns:
-    # Iterate over each row in current column
-    for index, value in df[column].items():
-        # Check if value contains any special characters
-        if any(char in special_chars for char in str(value)):
-            print(f"Special characters found in column '{column}', row {index}: {value}")
-```
 We will proceed with computing missing values for every column in the dataset and fill them with the suitable statistical value such as the median. Additionally, we will examine for any special characters that might impede the machine learning algorithm process.
 
 ## Exploratory Data Analysis 
