@@ -1,7 +1,7 @@
 # Project Overview
 
 ## Introduction
-For this project, we will analyse a credit facility dataset, which can be accessed from https://www.kaggle.com/datasets/laotse/credit-risk-dataset?resource=download. Employing Python coding within Jupyter Notebook, we will construct a machine learning model called Artificial Neural Network (ANN). The main goal of this analysis is to predict the 'loan_status' column assessing the likelihood of a current customer defaulting on their debt payment. 
+For this project, we will analyse a credit facility dataset which can be accessed from https://www.kaggle.com/datasets/laotse/credit-risk-dataset?resource=download. Employing Python coding, we will construct a machine learning model called Artificial Neural Network (ANN). The main goal of this analysis is to predict the 'loan_status' column assessing the likelihood of a current customer defaulting on their debt payment. 
 
 ## Dataset Information
 
@@ -32,7 +32,7 @@ By creating a descriptive statistics table, we can summarise important details a
 Based on the output, it seems that the columns "person_emp_length" and "loan_int_rate" contain some missing values. To address this issue, we can decide on the most appropriate method for replacing the missing values. Possible approaches include using the mean, median or mode depending on the data distribution. Additionally, we will also examine for any special characters that might impede the machine learning algorithm process.
 
 ## Exploratory Data Analysis 
-In this section, we will delve into comprehending the dataset. This encompasses tasks such as examining data distributions, identifying outliers, visualising correlations between variables and detecting any irregularities or trends, then transforming the insights obtained into valuable information.
+In this section, we will delve into comprehending the dataset. This encompasses tasks such as examining data distributions, identifying outliers, visualising correlations between variables and detecting any irregularities or trends.
 
 #### Scaling Numerical Features
 
@@ -58,7 +58,7 @@ Based on the Home Ownership plot: The plot suggests that individuals who rent or
 
 Based on the Loan Intent plot: It seems there is no apparent correlation between the purpose of the loan and either the loan amount or loan percent income. However, a notable concentration of data points is observed on the left-hand side of the plot. This concentration may suggest that the majority of borrowers, regardless of their loan intent, tend to seek loans with moderate amounts and are offered moderate loan amounts relative to their income.
 
-Based on the Loan Grade plot: The plot shows that loans assigned higher grades (A and B) correspond to lower loan percent income, while loans with lower grades (E and F) entail higher loan percent income. This could suggest that higher grades (like A and B) tend to have borrowers who owe less relative to their income. On the other hand, loans with lower grades (E and F) have borrowers who owe more relative to their income, indicating higher financial risk.
+Based on the Loan Grade plot: The plot shows that loans assigned higher grades (A and B) correspond to lower loan percent income while loans with lower grades (E and F) entail higher loan percent income. This could suggest that higher grades (like A and B) tend to have borrowers who owe less relative to their income. On the other hand, loans with lower grades (E and F) have borrowers who owe more relative to their income indicating higher financial risk.
 
 Based on the Default on File plot: The plot suggests that individuals without a history of default tend to obtain loans across a broader range of amounts and generally at lower interest rates compared to those with a default record.
 
@@ -75,7 +75,7 @@ Based on the Loan Grade chart: Most loans fall into grades 'A' and 'B'. This sug
 
 Based on the Loan Status chart: Analysis of 'Default' and 'Non-Default' statuses reveals that the majority of loans are 'Non-Default'. This indicates successful loan repayment management by most individuals. However, the presence of 'Default' loans underscores the financial challenges faced by some individuals.
 
-Based on the Credit Bureau Default on File chart: A significant proportion of individuals have no defaults recorded with the credit bureau. This serves as another positive indicator of their creditworthiness and may suggest a history of responsible borrowing practices
+Based on the Credit Bureau Default on File chart: A significant proportion of individuals have no defaults recorded with the credit bureau. This serves as another positive indicator of their creditworthiness and may suggest a history of responsible borrowing practices.
 
 #### Dummy Variables
 
@@ -132,15 +132,15 @@ Predictor of Importance
 
 As the ANN model is often seen as a 'black box,' it is important to determine the predictors that have the most impact on the model's predictions in order to gain insights into which inputs influence the model's decision-making process. This is particularly helpful for interpreting and identifying the key predictors that influence the model's predictions. Based to the features:
 
-1.	person_home_ownership_RENT: This emerges as the most critical predictor. It suggests that the home ownership status particularly renting, has a significant influence on the model’s predictions. This could be due to various factors such as financial instability associated with renting. Thereby, increasing the risk of the event the model is predicting.
-2.	loan_intent_PERSONAL: This feature ranks as the second most important. It indicates that the intent behind the loan, especially when it’s for personal use, strongly correlates with the outcome predicted by the model. This might be attributed to the fact that personal loans can be used for a variety of purposes, some of which might carry a higher risk.
+1.	person_home_ownership_RENT: This emerges as the most critical predictor. It suggests that the home ownership status particularly renting has a significant influence on the model’s predictions. This could be due to various factors such as financial instability associated with renting. Thereby, increasing the risk of the event the model is predicting.
+2.	loan_intent_PERSONAL: This feature ranks as the second most important. It indicates that the intent behind the loan, especially when it’s for personal use, strongly correlates with the outcome predicted by the model. This might be attributed to the fact that personal loans can be used for a variety of purposes as some of which might carry a higher risk.
 3.	cb_person_cred_hist_length: This stands as the third most influential predictor. The length of a person’s credit history serves as a reliable indicator of their financial behaviour and reliability. Thereby, impacting the model’s predictions.
 4.	person_age: This predictor is the fourth most significant. It suggests that the age of the person plays a substantial role in the model’s predictions. This could be due to various factors such as older individuals having more stable financial situations or younger individuals being more likely to take risks.
-5.	loan_intent_EDUCATION: This feature ranking fifth in importance indicates that the intent behind the loan, particularly when it’s for educational purposes, significantly influences the model’s predictions. This may be attributed to factors such as the high cost of education which could increase the likelihood of the event the model is predicting.
+5.	loan_intent_EDUCATION: This feature ranking fifth in importance indicates that the intent behind the loan particularly when it’s for educational purposes, significantly influences the model’s predictions. This may be attributed to factors such as the high cost of education which could increase the likelihood of the event the model is predicting.
 
 
 ### Concluding Remarks
-Artificial Neural Networks (ANNs) offer a promising avenue for transforming credit risk assessment within the banking sector. However, it's crucial to recognise the vital role of human insight when analysing data. Even with advanced algorithms like ANNs, certain aspects of risk analysis rely on human judgment and intuition. Take for instance, the essential task of handling missing values and detecting outliers during data preprocessing. This critical step requires careful consideration and input from banking experts. Mishandling of missing values and outliers could distort results and potentially obscure valuable insights.
+ANNs offer a promising avenue for transforming credit risk assessment within the banking sector. However, it's crucial to recognise the vital role of human insight when analysing data. This is because certain aspects of risk analysis rely on human judgment and intuition. Take for instance, the essential task of handling missing values and detecting outliers during data preprocessing. This critical step requires careful consideration and input from banking experts. Mishandling of missing values and outliers could distort results and potentially obscure valuable insights.
 
 Additionally, improving the model's effectiveness involves integrating economic indicators into the datasets. This task demands a deep comprehension of financial markets, a knowledge that seasoned experts possess. While ANNs excel at processing large volumes of data, they often lack the contextual understanding needed to interpret variables accurately within the dynamic landscape of economic indicators. Therefore, the input and insights of human analysts are crucial in ensuring the meaningful interpretation and prediction of the model.
 
